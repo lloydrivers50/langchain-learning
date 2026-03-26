@@ -1,0 +1,6 @@
+Data Storage Policy
+
+1. All data must be encrypted at rest.
+2. Access to sensitive data requires multi-factor authentication.
+3. Backups must be stored in a secure, offsite location.
+4. Data retention period is 7 years.
