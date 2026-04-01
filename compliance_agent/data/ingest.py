@@ -1,6 +1,12 @@
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
+
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain_core.documents import Document
+
+from .splitter import split_documents
+from .embeddings import build_vector_store
 
 # -----------------------------------------------------------------------------
 # load_markdown_directory
@@ -57,3 +63,10 @@ def load_markdown_directory(directory_path: str):
             print(f"[WARN] Failed to load {file_path}: {e}")
 
     return documents
+
+if __name__ == "__main__":                                                                                           
+      policies_dir = Path(__file__).parent / "policies"
+      data = load_markdown_directory(str(policies_dir))
+      chunks = split_documents(data)
+      vector_store = build_vector_store(chunks)
+
