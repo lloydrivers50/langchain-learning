@@ -8,18 +8,10 @@ embedding_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
 
 def build_vector_store(chunks):
-    """Take chunks from splitter.py, embed them, store in ChromaDB."""
-
     if not chunks:
         logger.warning("build_vector_store called with 0 chunks")
         return None
-
-    # =========================================================================
-    # CONNECTING TO YOUR DOCKER CHROMA
-    # ---------------------------------
-    # Your docker-compose.yml runs Chroma on port 8000.
-    # HttpClient talks to that container over the network.
-    # =========================================================================
+   
     chroma_client = chromadb.HttpClient(host="localhost", port=8000)
 
     vector_store = Chroma.from_documents(
